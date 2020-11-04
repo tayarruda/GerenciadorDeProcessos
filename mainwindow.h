@@ -19,6 +19,7 @@ public:
     void pegarPID();
     void executarComando(int idComando);
     void timerEvent(QTimerEvent *event);//refresh
+    void exibirPorcentagemCPU();
 
 public slots:
      void suspender();

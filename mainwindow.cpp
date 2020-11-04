@@ -35,13 +35,14 @@ using namespace std;
 
 QString pid;
 QString prioridade;
+int porcentagemCPU[8]={0};
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    QString command = "ps --no-header -eo %cpu,pid,pri,stat,pmem,cmd,psr";
+    QString command = "ps --no-header -eo %cpu,pid,ni,stat,pmem,cmd,psr";
     populandoTabela(command);
     startTimer(1000);
 }
@@ -76,6 +77,8 @@ void MainWindow::populandoTabela(QString command)
                 ui->tabela_4->setItem(r, c, new QTableWidgetItem(dado[c]));
                 ui->tabela_4->update();
             }
+
+        ui->tabela_4->setItem(r, 6, new QTableWidgetItem(dado[dado.length()-1]));
         r++;
     }
 
@@ -115,13 +118,14 @@ void MainWindow::executarComando(int idComando)
 void MainWindow::timerEvent(QTimerEvent *event)
 {
     if(ui->textEditFiltro_4->toPlainText().isEmpty()){
-        QString comando = "ps --no-header -eo %cpu,pid,pri,stat,pmem,cmd,psr";
+        QString comando = "ps --no-header -eo %cpu,pid,ni,stat,pmem,cmd,psr";
         populandoTabela(comando);
+
     }else{
         QString textoFiltro = ui->textEditFiltro_4->toPlainText();
 
         QString comando;
-        comando = " ps --no-header -eo %cpu,pid,pri,stat,pmem,cmd,psr | grep " + textoFiltro ;
+        comando = " ps --no-header -eo %cpu,pid,ni,stat,pmem,cmd,psr | grep " + textoFiltro ;
 
         QByteArray comandoConvertido = comando.toLocal8Bit();
         const char *comandoFinal = comandoConvertido.data();
@@ -129,6 +133,7 @@ void MainWindow::timerEvent(QTimerEvent *event)
 
         populandoTabela(comandoFinal);
     }
+    exibirPorcentagemCPU();
 }
 
 void MainWindow::suspender()
@@ -168,9 +173,11 @@ void MainWindow::mudarPrioridade()
     QString novaPrioridade;
 
     novaPrioridade = ui->comboBoxPrioridade_4->currentText();
+
     pegarPID();
 
     setpriority(PRIO_PROCESS, pid.toInt() , novaPrioridade.toInt());
+
 }
 
 void MainWindow::pegarPIDTabela(int r, int)
@@ -193,7 +200,7 @@ void MainWindow::filtro()
      QString textoFiltro = ui->textEditFiltro_4->toPlainText();
 
      QString comando;
-     comando = " ps --no-header -eo %cpu,pid,pri,stat,pmem,cmd,psr | grep " + textoFiltro ;
+     comando = " ps --no-header -eo %cpu,pid,ni,stat,pmem,cmd,psr | grep " + textoFiltro ;
 
      QByteArray comandoConvertido = comando.toLocal8Bit();
      const char *comandoFinal = comandoConvertido.data();
@@ -201,4 +208,75 @@ void MainWindow::filtro()
      populandoTabela(comandoFinal);
 }
 
+void MainWindow::exibirPorcentagemCPU()
+{
+
+    QProcess processo;
+
+    QString comando;
+    comando = " ps --no-header -eo %cpu,psr";
+
+
+    processo.start("sh", QStringList() << "-c" << comando);
+    processo.waitForFinished(-1);
+
+    QString saida = processo.readAllStandardOutput();
+    QStringList dados = saida.split("\n");
+
+    QStringList dado;
+    int cont = 0;
+
+
+    foreach(QString it, dados){
+        QString dadoAux = it.simplified();
+        dado = dadoAux.split(" ");
+        cont++;
+        if(cont != dados.length()){
+            //qDebug() << dado[0].toDouble();
+            switch (dado[1].toInt()) {
+
+            case 0:
+                porcentagemCPU[0]+=dado[0].toDouble();
+                break;
+            case 1:
+                porcentagemCPU[1]+=dado[0].toDouble();
+                break;
+            case 2:
+                porcentagemCPU[2]+=dado[0].toDouble();
+                break;
+            case 3:
+                porcentagemCPU[3]+=dado[0].toDouble();
+                break;
+            case 4:
+                porcentagemCPU[4]+=dado[0].toDouble();
+                break;
+            case 5:
+                porcentagemCPU[5]+=dado[0].toDouble();
+                break;
+            case 6:
+                porcentagemCPU[6]+=dado[0].toDouble();
+                break;
+            case 7:
+                porcentagemCPU[7]+=dado[0].toDouble();
+                break;
+            default:
+                break;
+
+            }
+       }
+    }
+    qDebug() << porcentagemCPU[3];
+    ui->CPU0->setValue(porcentagemCPU[0]);
+    ui->progressBar->setValue(porcentagemCPU[1]);
+    ui->progressBar_2->setValue(porcentagemCPU[2]);
+    ui->progressBar_3->setValue(porcentagemCPU[3]);
+    ui->progressBar_4->setValue(porcentagemCPU[4]);
+    ui->progressBar_5->setValue(porcentagemCPU[5]);
+    ui->progressBar_6->setValue(porcentagemCPU[6]);
+    ui->progressBar_7->setValue(porcentagemCPU[7]);
+
+    for (int i=0; i<8 ; i++ ) {
+        porcentagemCPU[i]=0;
+    }
+}
 
