@@ -35,7 +35,7 @@ using namespace std;
 
 QString pid;
 QString prioridade;
-int porcentagemCPU[8]={0};
+double porcentagemCPU[8]={0};
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -44,7 +44,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     QString command = "ps --no-header -eo %cpu,pid,ni,stat,pmem,cmd,psr";
     populandoTabela(command);
-    startTimer(1000);
+    startTimer(3000);
 }
 
 MainWindow::~MainWindow()
@@ -133,6 +133,7 @@ void MainWindow::timerEvent(QTimerEvent *event)
 
         populandoTabela(comandoFinal);
     }
+
     exibirPorcentagemCPU();
 }
 
@@ -217,7 +218,7 @@ void MainWindow::exibirPorcentagemCPU()
     comando = " ps --no-header -eo %cpu,psr";
 
 
-    processo.start("sh", QStringList() << "-c" << comando);
+    processo.start(comando);
     processo.waitForFinished(-1);
 
     QString saida = processo.readAllStandardOutput();
@@ -232,9 +233,7 @@ void MainWindow::exibirPorcentagemCPU()
         dado = dadoAux.split(" ");
         cont++;
         if(cont != dados.length()){
-            //qDebug() << dado[0].toDouble();
             switch (dado[1].toInt()) {
-
             case 0:
                 porcentagemCPU[0]+=dado[0].toDouble();
                 break;
@@ -265,15 +264,15 @@ void MainWindow::exibirPorcentagemCPU()
             }
        }
     }
-    qDebug() << porcentagemCPU[3];
-    ui->CPU0->setValue(porcentagemCPU[0]);
-    ui->progressBar->setValue(porcentagemCPU[1]);
-    ui->progressBar_2->setValue(porcentagemCPU[2]);
-    ui->progressBar_3->setValue(porcentagemCPU[3]);
-    ui->progressBar_4->setValue(porcentagemCPU[4]);
-    ui->progressBar_5->setValue(porcentagemCPU[5]);
-    ui->progressBar_6->setValue(porcentagemCPU[6]);
-    ui->progressBar_7->setValue(porcentagemCPU[7]);
+
+    ui->CPU0->setValue(int(porcentagemCPU[0]));
+    ui->progressBar->setValue(int(porcentagemCPU[1]));
+    ui->progressBar_2->setValue(int(porcentagemCPU[2]));
+    ui->progressBar_3->setValue(int(porcentagemCPU[3]));
+    ui->progressBar_4->setValue(int(porcentagemCPU[4]));
+    ui->progressBar_5->setValue(int(porcentagemCPU[5]));
+    ui->progressBar_6->setValue(int(porcentagemCPU[6]));
+    ui->progressBar_7->setValue(int(porcentagemCPU[7]));
 
     for (int i=0; i<8 ; i++ ) {
         porcentagemCPU[i]=0;

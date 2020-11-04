@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>834</width>
-    <height>776</height>
+    <width>939</width>
+    <height>771</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,14 +17,14 @@
    <widget class="QTabWidget" name="tabWidget_3">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>38</y>
-      <width>831</width>
+      <x>10</x>
+      <y>20</y>
+      <width>921</width>
       <height>701</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab_7">
      <attribute name="title">
@@ -33,9 +33,9 @@
      <widget class="QWidget" name="layoutWidget_13">
       <property name="geometry">
        <rect>
-        <x>0</x>
+        <x>60</x>
         <y>10</y>
-        <width>821</width>
+        <width>851</width>
         <height>31</height>
        </rect>
       </property>
@@ -90,8 +90,8 @@
      <widget class="QTableWidget" name="tabela_4">
       <property name="geometry">
        <rect>
-        <x>60</x>
-        <y>80</y>
+        <x>100</x>
+        <y>100</y>
         <width>741</width>
         <height>291</height>
        </rect>
@@ -141,7 +141,7 @@
      <widget class="QWidget" name="layoutWidget_14">
       <property name="geometry">
        <rect>
-        <x>0</x>
+        <x>60</x>
         <y>50</y>
         <width>251</width>
         <height>31</height>
@@ -429,58 +429,58 @@
     </widget>
     <widget class="QWidget" name="tab_8">
      <attribute name="title">
-      <string>Tab 2</string>
+      <string>Porcentagem</string>
      </attribute>
      <widget class="QProgressBar" name="CPU0">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>10</y>
-        <width>301</width>
-        <height>41</height>
+        <y>20</y>
+        <width>291</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="value">
-       <number>24</number>
+       <number>0</number>
       </property>
      </widget>
      <widget class="QProgressBar" name="progressBar">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>70</y>
-        <width>118</width>
-        <height>23</height>
+        <y>80</y>
+        <width>291</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="value">
-       <number>24</number>
+       <number>0</number>
       </property>
      </widget>
      <widget class="QProgressBar" name="progressBar_2">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>110</y>
-        <width>118</width>
-        <height>23</height>
+        <y>140</y>
+        <width>291</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="value">
-       <number>24</number>
+       <number>0</number>
       </property>
      </widget>
      <widget class="QProgressBar" name="progressBar_3">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>160</y>
-        <width>118</width>
-        <height>23</height>
+        <y>200</y>
+        <width>291</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="value">
-       <number>24</number>
+       <number>0</number>
       </property>
      </widget>
      <widget class="QProgressBar" name="progressBar_4">
@@ -488,51 +488,155 @@
        <rect>
         <x>380</x>
         <y>20</y>
-        <width>118</width>
-        <height>23</height>
+        <width>271</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="value">
-       <number>24</number>
+       <number>0</number>
       </property>
      </widget>
      <widget class="QProgressBar" name="progressBar_5">
       <property name="geometry">
        <rect>
         <x>380</x>
-        <y>70</y>
-        <width>118</width>
-        <height>23</height>
+        <y>80</y>
+        <width>271</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="value">
-       <number>24</number>
+       <number>0</number>
       </property>
      </widget>
      <widget class="QProgressBar" name="progressBar_6">
       <property name="geometry">
        <rect>
         <x>380</x>
-        <y>110</y>
-        <width>118</width>
-        <height>23</height>
+        <y>140</y>
+        <width>271</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="value">
-       <number>24</number>
+       <number>0</number>
       </property>
      </widget>
      <widget class="QProgressBar" name="progressBar_7">
       <property name="geometry">
        <rect>
         <x>380</x>
-        <y>160</y>
-        <width>118</width>
-        <height>23</height>
+        <y>200</y>
+        <width>271</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="value">
-       <number>24</number>
+       <number>0</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>67</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>CPU 1</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>60</y>
+        <width>67</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>CPU 2</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>120</y>
+        <width>67</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>CPU 3</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>180</y>
+        <width>67</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>CPU 4</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>380</x>
+        <y>0</y>
+        <width>67</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>CPU 5</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_6">
+      <property name="geometry">
+       <rect>
+        <x>380</x>
+        <y>60</y>
+        <width>67</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>CPU 6</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_7">
+      <property name="geometry">
+       <rect>
+        <x>380</x>
+        <y>120</y>
+        <width>67</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>CPU 7</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_8">
+      <property name="geometry">
+       <rect>
+        <x>380</x>
+        <y>180</y>
+        <width>67</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>CPU 8</string>
       </property>
      </widget>
     </widget>
@@ -556,7 +660,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>834</width>
+     <width>939</width>
      <height>22</height>
     </rect>
    </property>
